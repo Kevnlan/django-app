@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="main container">
+
+    <div class="float-right">
+        <a class="btn btn-outline-primary" href="{% url 'add_tenant' %}">Add Tenant</a>
+    </div>
+
+    {% if building_tenants %}
+  
+    <h3 class="mt-5">Tenants</h3>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Tn No</th>
+                <th scope="col">Name</th>
+                <th scope="col">Phone number</th>
+                <th scope="col">Next of Kin</th>
+                <th scope="col">Building</th>
+                <th scope="col">Check In Date</th>
+                <th scope="col">Contract Amount</th>
+                <th scope="col">status</th>
+                <th scope="col">Update</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for building_tenant in building_tenants %}
+            {{building_tenant}}
+            <tr>
+                <th scope="row">{{building_tenant.id}}</th>
+                <td>{{building_tenant.tenant.profile.name}}</td>
+                <td>{{building_tenant.tenant.profile.phone}}</td>
+                <td>{{building_tenant.tenant.profile.next_of_kin}}</td>
+                <td>{{building_tenant.building.name}}</td>
+                <td>{{building_tenant.checkInDate}}</td>
+                <td>{{building_tenant.contractAmount}}</td>
+                <td>{{building_tenant.status}}</td>
+                <td><a class="btn btn-primary" href="{% url 'edit_building_tenants' building_tenant.id %}">Update</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% else %}
+        <h5 class="text-muted text-center">There are no tenants in this building at the moment</h5>
+    {% endif %}
+
+</div>
+{% endblock %}

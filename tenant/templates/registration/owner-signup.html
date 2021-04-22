@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+
+<div class="card w-50 m-auto">
+  <div class="card-body">
+    <h3 class="text-center mb-5 text-info">Owner Sign up</h3>
+    <div class="mb-3">
+      <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button class="btn btn-outline-info mt-3" type="submit">Sign Up</button>
+      </form>
+    </div>
+    <p>Do you have an account? <a class="text-info" href="{% url 'login' %}">Log In</a></p>
+  </div>
+</div>
+
+<style>
+  footer{
+    bottom: 0px;
+    
+
+}
+</style>
+  
+{% endblock %}

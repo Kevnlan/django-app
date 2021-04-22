@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="main container">
+
+
+    {% if buildings %}
+    <h3>Buildings</h3>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">B No.</th>
+                <th scope="col">Name</th>
+                <th scope="col">Location</th>
+                <th scope="col">Owner</th>
+                <th scope="col">Cost</th>
+                <th scope="col">Building Tenants</th>
+                <th scope="col">Update</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for building in buildings %}
+            <tr>
+                <th scope="row">{{building.id}}</th>
+                <td>{{building.name}}</td>
+                <td>{{building.owner.profile.name}}</td>
+                <td>{{building.location}}</td>
+                <td>{{building.units_count}}</td>
+                <td><a href="{% url 'building_tenants' building.pk %}">Tenants</a></td>
+                <td><a class="btn btn-primary" href="{% url 'edit_building' building.id %}">Update</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+    {% if tenants %}
+
+    <h3 class="mt-5">Prospective Tenants</h3>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Tn No</th>
+                <th scope="col">Name</th>
+                <th scope="col">Phone number</th>
+                <th scope="col">Next of Kin</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tenant in tenants %}
+            <tr>
+                <th scope="row">{{tenant.id}}</th>
+                <td>{{tenant.name}}</td>
+                <td>{{tenant.phone}}</td>
+                <td>{{tenant.next_of_kin}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% endif %}
+
+        
+
+</div>
+{% endblock %}
